@@ -46,7 +46,7 @@ abstract class Controller{
 
 	protected function getTexto($clave){
 		//Metodo para limpiar los campos de tipo texto enviados por post
-		//transformar o quitar las comillas simples y doblres
+		//transformar o quitar las comillas simples y dobles
 		
 		if (isset($_POST[$clave]) && !empty($_POST[$clave])) {
 			$_POST[$clave] = htmlspecialchars($_POST[$clave], ENT_QUOTES);
@@ -57,7 +57,7 @@ abstract class Controller{
 
 	protected function getInt($clave){
 		//Metodo para limpiar los campos de tipo enteros enviados por post
-		//transformar o quitar las comillas simples y doblres
+		//transformar o quitar las comillas simples y dobles
 		
 		if (isset($_POST[$clave]) && !empty($_POST[$clave])) {
 			$_POST[$clave] = filter_var($_POST[$clave], FILTER_VALIDATE_INT);
@@ -68,7 +68,7 @@ abstract class Controller{
 
 	protected function getEmail($clave){
 		//Metodo para limpiar los campos de tipo enteros enviados por post
-		//transformar o quitar las comillas simples y doblres
+		//transformar o quitar las comillas simples y dobles
 		
 		if (isset($_POST[$clave]) && !empty($_POST[$clave])) {
 			$_POST[$clave] = filter_var($_POST[$clave], FILTER_VALIDATE_EMAIL);

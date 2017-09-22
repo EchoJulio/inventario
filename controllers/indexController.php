@@ -8,19 +8,11 @@ class indexController extends Controller{
 		parent::__construct();
 	}
 	public function index(){
-
-		$post = $this->loadModel('post');
-		
-		$this->view->post = $post->getPosts();
-		$this->view->categorias = $post->getCategorias();
-		$this->view->subCategorias = $post->getSubCategorias();
-		$this->view->images = $post->getImg();
-
 		//Enviar un el parametro titulo a la vista
-		$this->view->titulo = 'Mercadito | Main';
+		$this->view->titulo = 'Inventario | Main';
 
 		//Llamamos la vista perteneciente a este metodo
-		$this->view->renderizar('index','inicio');
+		$this->view->renderizar('index');
 	}
 
 

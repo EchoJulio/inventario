@@ -77,10 +77,13 @@ class View{
 		
 		//Verificamos si el archivo  existe o puede user ejecutado
 		if (is_readable($rutaView)) {
-			include_once ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'header.php';
-			include_once $rutaView;
-			include_once ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'footer.php';
-
+			if ($this->controlador == 'login') {
+				include_once $rutaView;
+			}else{
+				include_once ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'header.php';
+				include_once $rutaView;
+				include_once ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'footer.php';
+			}
 		}else{
 			throw new Exception("Error: con la vista solicitada");
 			
