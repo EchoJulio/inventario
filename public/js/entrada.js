@@ -6,9 +6,13 @@ $(document).ready(function(e){
 			var url = 'http://localhost/inventario/productos/consulta_ajax';
 			$.post(url,{'buscar':buscar}, function(data,status){
 				respuesta = jQuery.parseJSON(data);
-  		  		$("[name='titulo']").val(respuesta.titulo);
-  		  		$("[name='id']").val(respuesta.id);
-  		  		console.log(respuesta['titulo']);
+				//console.log(data);
+  		  		if (status === 'success') {
+	  				$("[name='titulo']").val(respuesta.titulo);
+	  				$("[name='id']").val(respuesta.id);
+  		  		}else{
+  		  			alert('Al parece hubo un error con el servidor.');
+  		  		}
 			});
 		}else{
 			alert('Debes ingresar el nombre del producto.');

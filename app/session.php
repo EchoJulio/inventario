@@ -52,7 +52,7 @@ class Session{
 			//Si el usuario no esta autenticado
 			//lo redireccionamos
 
-			header('Location:' . BASE_URL . 'error/access/5050');
+			header('Location:' . BASE_URL . 'login');
 			exit;
 		}
 		//validamos el tiempo
@@ -191,7 +191,7 @@ class Session{
 			//llama al metodo destroy y se elimina la sesion
 
 			Session::destroy();
-			header('Location:' . BASE_URL . 'error/access/8080');
+			header('Location:' . BASE_URL . 'login');
 
 		}else{
 			//si aun esta en tiempo de sesion 

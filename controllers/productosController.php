@@ -13,10 +13,11 @@ class productosController extends Controller{
 		if (isset($_POST['buscar']) && !empty($_POST['buscar'])) {
 			echo json_encode($this->producto->lista($_POST['buscar']));
 		}else{
-			echo json_encode(array('mensaje' => 'no se encontro ningun producto.'));
+			echo json_encode(array('mensaje' => 'error'));
 		}
 	}
 	public function index(){
+		Session::acceso('usuario');
 		$this->view->titulo = 'Productos';
 		$this->view->productos = $this->producto->lista();
 		//Mi metodo para llamar las vistas

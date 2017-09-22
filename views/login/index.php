@@ -20,27 +20,27 @@
 </head>
 <body class="login-background">
 <div class="container">
-	<form class="form-singin col-md-8 offset-sm-4" method="post">
-		<legend>Inicio de Sesión</legend>
+	<form class="form-singin col-md-4 offset-sm-4" method="post">
+		<legend class="text-primary" style="text-align: center;">Inicio de Sesión</legend>
 		<div class="form-group row">
-			<label  class="col-md-2 col-form-label" for="usuario">Usuario: </label>
-			<div class="col-md-4">
+			<label  class="col-md-4 col-form-label" for="usuario">Usuario: </label>
+			<div class="col-md-8">
 				<input class="form-control" type="text" name="username" placeholder="Usuario"  required="">
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="col-md-2 col-form-label" for="password">Contraseña: </label>
-			<div class="col-md-4">
+			<label class="col-md-4 col-form-label" for="password">Contraseña: </label>
+			<div class="col-md-8">
 				<input class="form-control" type="password" name="password" placeholder="Contraseña"  required="">
 			</div>
 		</div>
 		<div class="form-group row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<input class="btn btn-outline-primary  btn-block" type="submit" value="Iniciar Sesión">
 			</div>
 		</div>
 		<?php if (isset($this->mensaje_error) && !empty($this->mensaje_error)): ?>
-			<div class="alert alert-danger col-md-6" role="alert">
+			<div class="alert alert-danger col-md-12" role="alert">
 			  <?php echo $this->mensaje_error; ?>
 			</div>
 		<?php endif ?>

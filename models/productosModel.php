@@ -22,7 +22,7 @@ class productosModel extends model
 	public function lista($id = false){
 		if ($id) {
 			//$id = (int) $id;
-			$lista_query = $this->db->prepare('SELECT producto.id as id, producto.titulo as titulo, descripcion, categoria.titulo as categoria FROM producto LEFT JOIN categoria ON producto.id_categoria = categoria.id WHERE producto.id = :id OR producto.titulo = :id');
+			$lista_query = $this->db->prepare('SELECT producto.id as id, producto.titulo as titulo, descripcion, categoria.titulo as categoria FROM producto LEFT JOIN categoria ON producto.id_categoria = categoria.id WHERE producto.id = :id OR producto.titulo LIKE :id');
 			$lista_query->execute(array(':id' => $id));
 			return $lista_query->fetch(PDO::FETCH_ASSOC);
 		}else{

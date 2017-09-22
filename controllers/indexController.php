@@ -8,6 +8,7 @@ class indexController extends Controller{
 		parent::__construct();
 	}
 	public function index(){
+		Session::acceso('usuario');
 		//Enviar un el parametro titulo a la vista
 		$this->view->titulo = 'Inventario | Main';
 
