@@ -11,23 +11,31 @@
 	    <a class="nav-link active" href="<?php echo BASE_URL; ?>inventario/salida">Salidas</a>
 	  </li>
 	</ul>
-	<form class="form-singin col-md-12" method="post">
-		<legend>Registro De Salida</legend>
+	<form class="form-tab col-md-12" method="post">
 		<div class="form-group row">
 			<label  class="col-md-1 col-form-label" for="cantidad">Producto: </label>
 			<div class="col-md-8">
-				<input class="form-control" type="text" name="producto" required="">
+				<input class="form-control" type="text" id="producto" name="producto" required="">
 			</div>
+			<input type="hidden" name="id">
 			<div class="col-md-1 offset-sm-2">
 				<input class="btn btn-outline-info" type="submit" id="buscar" value="Buscar">
 			</div>
 
 		</div>
+		<div class="form-group row">
+			<label  class="col-md-1 col-form-label" for="cantidad">Titulo: </label>
+			<div class="col-md-8">
+				<input class="form-control" type="text" id="producto" name="titulo" required="" disabled="">
+			</div>
+		</div>
+		<hr>
+		<legend>Registro De Salida</legend>
 		<hr>
 		<div class="form-group row">
 			<label  class="col-md-1 col-form-label" for="cantidad">Razon: </label>
 			<div class="col-md-2">
-				<select class="form-control" name="titulo">
+				<select class="form-control" name="razon">
 					<option value="oferta">Oferta</option>
 					<option value="sobrante">Sobrante</option>
 					<option value="ajuste">Ajuste</option>
@@ -61,14 +69,15 @@
 			</div>
 		</div>
 		<?php if (isset($this->mensaje_error) && !empty($this->mensaje_error)): ?>
-			<div class="alert alert-danger col-md-6" role="alert">
-			  <?php echo $this->mensaje_error; ?>
+			<div class="alert alert-danger offset-sm-3 col-md-6" role="alert">
+			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_error; ?>
 			</div>
 		<?php endif ?>
 		<?php if (isset($this->mensaje_exito) && !empty($this->mensaje_exito)): ?>
-			<div class="alert alert-success col-md-6" role="alert">
-			  <?php echo $this->mensaje_exito; ?>
+			<div class="alert alert-success offset-sm-3 col-md-6" role="alert">
+			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_exito; ?>
 			</div>
 		<?php endif ?>
 	</form>
 </div>
+<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/entrada.js"></script>

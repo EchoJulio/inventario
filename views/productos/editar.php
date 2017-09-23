@@ -8,7 +8,7 @@
 	    <a class="nav-link" href="<?php echo BASE_URL; ?>productos/nuevo">Nuevo</a>
 	  </li>
 	</ul>
-	<form class="form-singin col-md-10 offset-sm-3" method="post">
+	<form class="form-tab col-md-10 offset-sm-3" method="post">
 		<legend>Editar Producto</legend>
 		<div class="form-group row">
 			<label  class="col-md-2 col-form-label" for="titulo">Categoria: </label>

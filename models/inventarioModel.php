@@ -6,11 +6,15 @@ con la tabla productos.
 */
 class inventarioModel extends model
 {
-	private $titulo = '';
-	private $descripcion = '';
-	private $id_categoria = '';
+	private $id_producto = '';
 	private $id_usuario = '';
-	private $id = '';
+	private $detalle = '';
+	private $descripcion = '';
+	private $unidad = '';
+	private $costo_unitario = '';
+	private $costo_total = '';
+	private $stock = '';
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -31,25 +35,81 @@ class inventarioModel extends model
 		}
 		
 	}
-	public function add(){
-		 $add_query = $this->db->prepare('INSERT INTO producto (titulo, descripcion, id_categoria,id_usuario) VALUES (:titulo, :descripcion,:id_categoria,:id_usuario)');
-
-		return $add_query->execute(array(
-				':titulo' => $this->titulo,
+	private function consulta_stock($id_producto){
+		$stock_query = $this->db->prepare('SELECT inventario.unidad as stock FROM inventario LEFT JOIN transaccion_entrada ON transaccion_entrada.id_inventario = inventario.id LEFT JOIN entrada ON entrada.id = transaccion_entrada.id_entrada WHERE entrada.id_producto = :id_producto');
+		$stock_query->execute(array(':id_producto' => $id_producto));
+		$stock_query = $stock_query->fetch(PDO::FETCH_ASSOC);
+		if ($stock_query['stock'] != null) {
+			return $stock_query['stock'];
+		}else{
+			return 0;
+		}
+		
+	}
+	public function entrada(){
+		 $entrada_query = $this->db->prepare('INSERT INTO entrada (id_producto,id_usuario,detalle,descripcion,unidad,costo_unitario,costo_total) VALUES (:id_producto,:id_usuario,:detalle,:descripcion,:unidad,:costo_unitario,:costo_total)');
+		 $inventario_query = $this->db->prepare('INSERT INTO inventario (unidad,costo_unitario,costo_total) VALUES (:unidad,:costo_unitario,:costo_total)');
+		 $this->stock = $this->unidad + $this->consulta_stock($this->id_producto);
+		 $costo_total = $this->costo_unitario * $this->unidad;
+		 //$costo_total = $this->cantidad * $this->costo;
+		 $datos_entrada = array(
 				':descripcion' => $this->descripcion,
-				':id_categoria' => $this->id_categoria,
-				':id_usuario' => $this->id_usuario
+				':id_producto' => $this->id_producto,
+				':id_usuario' => $this->id_usuario,
+				':costo_unitario' => $this->costo_unitario,
+				':detalle' => $this->detalle,
+				':costo_total' => $costo_total,
+				':unidad' => $this->unidad
+			);
+		 $datos_inventario = array(
+				':costo_unitario' => $this->costo_unitario,
+				':costo_total' => $this->costo_unitario * $this->stock,
+				':unidad' => $this->stock
+			);
+		if ($entrada_query->execute($datos_entrada) && $inventario_query->execute($datos_inventario)) {
+			$this->registrar_entrada_inventario();
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function salida(){
+		 $add_query = $this->db->prepare('INSERT INTO salida (id_producto,id_usuario,detalle,descripcion,unidad,costo_unitario,costo_total) VALUES (:id_producto,:id_usuario,:detalle,:descripcion,:unidad,:costo_unitario,:costo_total)');
+		 //$this->stock = $this->cantidad + $this->consulta_stock($this->id_producto);
+		 $costo_total = $this->costo_unitario * $this->unidad;
+		 //$costo_total = $this->cantidad * $this->costo;
+		return $add_query->execute(array(
+				':descripcion' => $this->descripcion,
+				':id_producto' => $this->id_producto,
+				':id_usuario' => $this->id_usuario,
+				':costo_unitario' => $this->costo_unitario,
+				':detalle' => $this->detalle,
+				':costo_total' => $costo_total,
+				':unidad' => $this->unidad
 			));
 	}
-	public function edit(){
-		 $edit_query = $this->db->prepare('UPDATE producto SET titulo = :titulo, descripcion = :descripcion, id_categoria = :id_categoria WHERE id = :id');
+	private function registrar_entrada_inventario(){
+		$registrar_query = $this->db->prepare('INSERT INTO transaccion_entrada (id_inventario, id_entrada) VALUES (:id_inventario, :id_entrada)');
+		$last_entrada = $this->consulta_ultima_entrada();
+		$last_inventario = $this->consulta_ultimo_inventario();
+		$datos_transaccion = array(
+				':id_inventario' => $last_inventario,
+				':id_entrada' => $last_entrada
+			);
+		return $registrar_query->execute($datos_transaccion);
+	}
+	private function consulta_ultima_entrada(){
+		$last_entrada = $this->db->query('SELECT MAX(id) AS id FROM entrada');
+		$last_entrada = $last_entrada->fetch(PDO::FETCH_ASSOC);
+		return $last_entrada['id'];
+	}
+	private function consulta_ultimo_inventario(){
+		$last_inventario = $this->db->query('SELECT MAX(id) AS id FROM inventario');
+		$last_inventario = $last_inventario->fetch(PDO::FETCH_ASSOC);
+		return $last_inventario['id'];
+	}
+	private function registrar_salida_inventario(){
 
-		return $edit_query->execute(array(
-				':titulo' => $this->titulo,
-				':descripcion' => $this->descripcion,
-				':id_categoria' => $this->id_categoria,
-				':id' => $this->id
-			));
 	}
 	public function delete(){
 		 $edit_query = $this->db->prepare('DELETE FROM producto WHERE id = :id');

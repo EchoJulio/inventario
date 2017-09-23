@@ -11,7 +11,7 @@
 	    <a class="nav-link" href="<?php echo BASE_URL; ?>inventario/salida">Salidas</a>
 	  </li>
 	</ul>
-	<form class="form-singin col-md-12" method="post">
+	<form class="form-tab col-md-12" method="post">
 		<div class="form-group row">
 			<label  class="col-md-1 col-form-label" for="cantidad">Producto: </label>
 			<div class="col-md-8">
@@ -46,10 +46,6 @@
 			<div class="col-md-2">
 				<input class="form-control" type="number" name="cantidad" required="">
 			</div>
-			<label  class="col-md-1 col-form-label" for="precio">Precio: </label>
-			<div class="col-md-3">
-				<input class="form-control" type="number" name="precio" required="">
-			</div>
 			<label  class="col-md-1 col-form-label" for="costo">Costo: </label>
 			<div class="col-md-3">
 				<input class="form-control" type="number" name="costo" required="">
@@ -68,13 +64,13 @@
 			</div>
 		</div>
 		<?php if (isset($this->mensaje_error) && !empty($this->mensaje_error)): ?>
-			<div class="alert alert-danger col-md-6" role="alert">
-			  <?php echo $this->mensaje_error; ?>
+			<div class="alert alert-danger offset-sm-3 col-md-6" role="alert">
+			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_error; ?>
 			</div>
 		<?php endif ?>
 		<?php if (isset($this->mensaje_exito) && !empty($this->mensaje_exito)): ?>
-			<div class="alert alert-success col-md-6" role="alert">
-			  <?php echo $this->mensaje_exito; ?>
+			<div class="alert alert-success offset-sm-3 col-md-6" role="alert">
+			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_exito; ?>
 			</div>
 		<?php endif ?>
 	</form>
