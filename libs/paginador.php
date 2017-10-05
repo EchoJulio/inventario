@@ -66,6 +66,10 @@ class Paginador
         
         $this->_paginacion = $paginacion;
 		$this->_rangoPaginacion($paginacion);
+        //control para que no puedan solicitar una url inexistente
+       // if ($pagina > $total) {
+            //header('Location:' . BASE_URL . 'error/access/1010');
+       // }
         
         return $this->_datos;
     }

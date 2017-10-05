@@ -14,6 +14,18 @@ class userModel extends model
 		parent::__construct();
 	}
 
+	public function lista($id = false){
+		if ($id) {
+			//$id = (int) $id;
+			$lista_query = $this->db->prepare('SELECT * FROM user WHERE id = :id');
+			$lista_query->execute(array(':id' => $id));
+			return $lista_query->fetch(PDO::FETCH_ASSOC);
+		}else{
+			$lista_query = $this->db->query('SELECT * FROM user');
+			return $lista_query->fetchAll(PDO::FETCH_ASSOC);
+		}
+		
+	}
 	public function set($propiedad,$valor){
 		$this->$propiedad = $valor;
 	}

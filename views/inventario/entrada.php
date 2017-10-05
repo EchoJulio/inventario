@@ -12,6 +12,17 @@
 	  </li>
 	</ul>
 	<form class="form-tab col-md-12" method="post">
+
+		<?php if (isset($this->mensaje_error) && !empty($this->mensaje_error)): ?>
+			<div class="alert alert-danger" role="alert">
+			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_error; ?>
+			</div>
+		<?php endif ?>
+		<?php if (isset($this->mensaje_exito) && !empty($this->mensaje_exito)): ?>
+			<div class="alert alert-success" role="alert">
+			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_exito; ?>
+			</div>
+		<?php endif ?>
 		<div class="form-group row">
 			<label  class="col-md-1 col-form-label" for="cantidad">Producto: </label>
 			<div class="col-md-8">
@@ -43,17 +54,17 @@
 		</div>
 		<div class="form-group row">
 			<label  class="col-md-1 col-form-label" for="cantidad">Cantidad: </label>
-			<div class="col-md-2">
+			<div class="col-md-5">
 				<input class="form-control" type="number" name="cantidad" required="">
 			</div>
 			<label  class="col-md-1 col-form-label" for="costo">Costo: </label>
-			<div class="col-md-3">
+			<div class="col-md-5">
 				<input class="form-control" type="number" name="costo" required="">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-md-1 col-form-label" for="descripcion">Descripcion: </label>
-			<div class="col-md-10">
+			<div class="col-md-10 offset-sm-1 ">
 				<textarea class="form-control" rows="5" type="text" name="descripcion" placeholder="Descripcion..."  required=""></textarea>
 			</div>
 		</div>
@@ -63,16 +74,6 @@
 				<input class="btn btn-outline-success" type="submit" value="Enviar">
 			</div>
 		</div>
-		<?php if (isset($this->mensaje_error) && !empty($this->mensaje_error)): ?>
-			<div class="alert alert-danger offset-sm-3 col-md-6" role="alert">
-			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_error; ?>
-			</div>
-		<?php endif ?>
-		<?php if (isset($this->mensaje_exito) && !empty($this->mensaje_exito)): ?>
-			<div class="alert alert-success offset-sm-3 col-md-6" role="alert">
-			 <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo $this->mensaje_exito; ?>
-			</div>
-		<?php endif ?>
 	</form>
 </div>
 <script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/entrada.js"></script>

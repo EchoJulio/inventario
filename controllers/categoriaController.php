@@ -1,6 +1,6 @@
 <?php
 
-class productosController extends Controller{
+class categoriaController extends Controller{
 
 	private $categoria;
 	private $producto;
@@ -9,15 +9,9 @@ class productosController extends Controller{
 		$this->categoria = $this->loadModel('categoria');
 		$this->producto = $this->loadModel('productos');
 	}
-	public function consulta_ajax(){
-		if (isset($_POST['buscar']) && !empty($_POST['buscar'])) {
-			echo json_encode($this->producto->lista($_POST['buscar']));
-		}else{
-			echo json_encode(array('mensaje' => 'error'));
-		}
-	}
+
 	public function index($pagina = false){
-		Session::acceso('usuario');
+		Session::acceso('admin');
 		if (!$this->filtrarInt($pagina)) {
 			$pagina = false;
 		}else{

@@ -35,4 +35,7 @@
 	    <?php endif ?>
 	  </tbody>
 	</table>
+	<?php if ($this->paginacion): ?>
+		<?php echo $this->paginacion; ?>
+	<?php endif ?>
 </div>
